@@ -1,0 +1,162 @@
+{
+  "name": "prompt-mark",
+  "displayName": "Prompt Mark",
+  "description": "Autocomplete de referências @arquivo e /skill em Markdown, estilo Claude Code CLI.",
+  "version": "0.1.0",
+  "publisher": "douglas-braga",
+  "author": {
+    "name": "Douglas Braga",
+    "email": "douglasob94@gmail.com",
+    "url": "https://github.com/douglasob"
+  },
+  "license": "MIT",
+  "icon": "media/icon.png",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/douglasob/prompt-mark.git"
+  },
+  "bugs": {
+    "url": "https://github.com/douglasob/prompt-mark/issues"
+  },
+  "homepage": "https://github.com/douglasob/prompt-mark#readme",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other",
+    "Snippets"
+  ],
+  "keywords": [
+    "markdown",
+    "autocomplete",
+    "claude",
+    "claude-code",
+    "prompt",
+    "skills"
+  ],
+  "galleryBanner": {
+    "color": "#1e1e2e",
+    "theme": "dark"
+  },
+  "qna": "marketplace",
+  "main": "./dist/extension.js",
+  "activationEvents": [
+    "onLanguage:markdown"
+  ],
+  "contributes": {
+    "commands": [
+      {
+        "command": "promptMark.copyRef",
+        "title": "Prompt Mark: Copiar caminho como referência @"
+      },
+      {
+        "command": "promptMark.refreshSkills",
+        "title": "Prompt Mark: Recarregar skills"
+      }
+    ],
+    "menus": {
+      "explorer/context": [
+        {
+          "command": "promptMark.copyRef",
+          "group": "6_copypath"
+        }
+      ],
+      "editor/context": [
+        {
+          "command": "promptMark.copyRef",
+          "when": "resourceLangId == markdown || editorTextFocus",
+          "group": "6_copypath"
+        }
+      ]
+    },
+    "keybindings": [
+      {
+        "command": "promptMark.copyRef",
+        "key": "ctrl+alt+c",
+        "mac": "cmd+alt+c",
+        "when": "editorTextFocus || explorerViewletFocus || filesExplorerFocus"
+      }
+    ],
+    "configuration": {
+      "title": "Prompt Mark",
+      "properties": {
+        "promptMark.fileGlob": {
+          "type": "string",
+          "default": "**/*",
+          "description": "Glob de arquivos oferecidos no autocomplete @."
+        },
+        "promptMark.excludeGlob": {
+          "type": "string",
+          "default": "**/{node_modules,.git,dist,.nuxt,.output}/**",
+          "description": "Glob de exclusão para a busca de arquivos."
+        },
+        "promptMark.maxResults": {
+          "type": "number",
+          "default": 500,
+          "description": "Número máximo de arquivos retornados por busca."
+        },
+        "promptMark.insertFormat": {
+          "type": "string",
+          "enum": [
+            "at",
+            "path",
+            "markdownLink"
+          ],
+          "default": "at",
+          "enumDescriptions": [
+            "@caminho/relativo (estilo CLI)",
+            "caminho/relativo (texto puro)",
+            "[nome](caminho/relativo) (link Markdown)"
+          ],
+          "description": "Formato inserido ao selecionar um arquivo."
+        },
+        "promptMark.enableSkills": {
+          "type": "boolean",
+          "default": true,
+          "description": "Habilitar autocomplete de skills com /."
+        },
+        "promptMark.enableHover": {
+          "type": "boolean",
+          "default": true,
+          "description": "Mostrar preview ao passar o mouse sobre @arquivo e /skill."
+        },
+        "promptMark.hoverPreviewLines": {
+          "type": "number",
+          "default": 20,
+          "description": "Número de linhas exibidas no preview de hover de arquivo."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "pnpm run check && pnpm run compile",
+    "compile": "node esbuild.js --production",
+    "watch": "node esbuild.js --watch",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint src",
+    "check": "pnpm run typecheck && pnpm run lint",
+    "pretest": "tsc -p tsconfig.json",
+    "test": "node --test \"out/test/**/*.test.js\"",
+    "package": "vsce package --no-dependencies"
+  },
+  "devDependencies": {
+    "@types/node": "^20.x",
+    "@types/vscode": "^1.85.0",
+    "@typescript-eslint/eslint-plugin": "^8.0.0",
+    "@typescript-eslint/parser": "^8.0.0",
+    "@vscode/vsce": "^3.2.0",
+    "esbuild": "^0.24.0",
+    "eslint": "^9.0.0",
+    "typescript": "^5.6.0"
+  },
+  "dependencies": {
+    "gray-matter": "^4.0.3"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild",
+      "@vscode/vsce-sign",
+      "keytar"
+    ]
+  }
+}
