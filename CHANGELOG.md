@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.2.0] - 2026-06-27
+
+### Adicionado
+- Contagem de tokens (cl100k via `gpt-tokenizer`) do arquivo Markdown ativo na status bar.
+- Exibe tokens da seleção e do total quando há texto selecionado.
+- Comando "Recontar tokens do Markdown" (clique na status bar recalcula).
+- Setting `promptMark.enableTokenCount` para habilitar/desabilitar a contagem.
+
+### Infra
+- Atualiza Node.js de 20 para 24 nos workflows de CI e release.
+
 ## [0.1.0] - 2026-06-27
 
 Primeira versão (MVP completo).

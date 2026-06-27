@@ -3,14 +3,17 @@ import { FileCompletionProvider } from "./providers/fileCompletionProvider";
 import { SkillCompletionProvider } from "./providers/skillCompletionProvider";
 import { RefHoverProvider } from "./providers/hoverProvider";
 import { SkillScanner } from "./services/skillScanner";
+import { TokenCounter } from "./services/tokenCounter";
 import { copyRelativeRef } from "./commands/copyRelativeRef";
 
 const MD: vscode.DocumentSelector = { language: "markdown" };
 
 export function activate(context: vscode.ExtensionContext): void {
   const scanner = new SkillScanner();
+  const tokenCounter = new TokenCounter();
 
   context.subscriptions.push(
+    tokenCounter,
     // @ -> arquivos do workspace
     vscode.languages.registerCompletionItemProvider(
       MD,
@@ -35,6 +38,9 @@ export function activate(context: vscode.ExtensionContext): void {
     vscode.commands.registerCommand("promptMark.refreshSkills", () => {
       scanner.refresh();
       vscode.window.setStatusBarMessage("Prompt Mark: skills recarregadas", 3000);
+    }),
+    vscode.commands.registerCommand("promptMark.refreshTokens", () => {
+      tokenCounter.update();
     })
   );
 }

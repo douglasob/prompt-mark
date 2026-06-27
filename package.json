@@ -2,7 +2,7 @@
   "name": "prompt-mark",
   "displayName": "Prompt Mark",
   "description": "Autocomplete de referências @arquivo e /skill em Markdown, estilo Claude Code CLI.",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "publisher": "douglas-braga",
   "author": {
     "name": "Douglas Braga",
@@ -52,6 +52,10 @@
       {
         "command": "promptMark.refreshSkills",
         "title": "Prompt Mark: Recarregar skills"
+      },
+      {
+        "command": "promptMark.refreshTokens",
+        "title": "Prompt Mark: Recontar tokens do Markdown"
       }
     ],
     "menus": {
@@ -124,6 +128,11 @@
           "type": "number",
           "default": 20,
           "description": "Número de linhas exibidas no preview de hover de arquivo."
+        },
+        "promptMark.enableTokenCount": {
+          "type": "boolean",
+          "default": true,
+          "description": "Mostrar contagem de tokens (cl100k) do arquivo Markdown na status bar."
         }
       }
     }
@@ -150,6 +159,7 @@
     "typescript": "^5.6.0"
   },
   "dependencies": {
+    "gpt-tokenizer": "^2.9.0",
     "gray-matter": "^4.0.3"
   },
   "pnpm": {
