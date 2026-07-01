@@ -49,7 +49,8 @@ export class TokenCounter implements vscode.Disposable {
       .get<boolean>("enableTokenCount", true);
 
     const editor = vscode.window.activeTextEditor;
-    if (!enabled || editor?.document.languageId !== "markdown") {
+    const langId = editor?.document.languageId;
+    if (!enabled || !editor || (langId !== "markdown" && langId !== "skill")) {
       this.item.hide();
       return;
     }

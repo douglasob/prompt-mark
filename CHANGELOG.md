@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.3.0] - 2026-06-30
+
+### Adicionado
+- Suporte à linguagem `skill` (arquivos de skill do Claude): autocomplete, hover e contagem de tokens agora também ativam nesses arquivos, não só em Markdown.
+
 ## [0.2.0] - 2026-06-27
 
 ### Adicionado

@@ -6,7 +6,10 @@ import { SkillScanner } from "./services/skillScanner";
 import { TokenCounter } from "./services/tokenCounter";
 import { copyRelativeRef } from "./commands/copyRelativeRef";
 
-const MD: vscode.DocumentSelector = { language: "markdown" };
+const MD: vscode.DocumentSelector = [
+  { language: "markdown" },
+  { language: "skill" },
+];
 
 export function activate(context: vscode.ExtensionContext): void {
   const scanner = new SkillScanner();

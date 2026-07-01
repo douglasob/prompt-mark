@@ -2,7 +2,7 @@
   "name": "prompt-mark",
   "displayName": "Prompt Mark",
   "description": "Autocomplete de referências @arquivo e /skill em Markdown, estilo Claude Code CLI.",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "publisher": "douglas-braga",
   "author": {
     "name": "Douglas Braga",
@@ -41,7 +41,8 @@
   "qna": "marketplace",
   "main": "./dist/extension.js",
   "activationEvents": [
-    "onLanguage:markdown"
+    "onLanguage:markdown",
+    "onLanguage:skill"
   ],
   "contributes": {
     "commands": [
